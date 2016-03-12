@@ -28,8 +28,8 @@ db.once('open', function() {
 
 
 //Require Schemas
-var Note = require('./models/Note.js');
-var User = require('./models/User.js');
+var Note = require('./noteModel.js');
+var User = require('./userModel.js');
 
 
 
@@ -110,7 +110,13 @@ app.get('/user', function(req, res) {
 
 //Route to see what user looks like WITH populating
 app.get('/populateduser', function(req, res) {
-
+  User
+    .find({})
+    .populate('notes')
+    .exec(function (err, dbUsers) {
+      if (err) return handleError(err);
+      console.log(dbUsers);
+    });
 ////////////////////////////////////////////////
 //WRITE YOUR CODE IN HERE
 //RESPOND WITH THE POPULATED USER OBJECT

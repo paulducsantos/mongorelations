@@ -5,8 +5,12 @@ var UserSchema = new Schema({
   name: {
     type:String,
     unique:true
-  }
+  },
   //Have the Schema take an array named "notes" which consists of an array of ObjectIds from the Note Collection
+  notes: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Note'
+  }]
 });
 
 var User = mongoose.model('User', UserSchema);
